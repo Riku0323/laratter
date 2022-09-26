@@ -61,8 +61,20 @@ class TweetController extends Controller
       // 戻り値は挿入されたレコードの情報
       $data = $request->merge(['user_id' => Auth::user()->id])->all();
       $result = Tweet::create($data);
+
+      $newTweet = $request->tweet;
+      if ($newTweet == '死にたい'){
+        return redirect()->route('help');
+      }
       // ルーティング「todo.index」にリクエスト送信（一覧ページに移動）
-      return redirect()->route('tweet.index');
+      else {
+        return redirect()->route('tweet.index');
+      }
+    } 
+
+    public function help()
+    {
+      return view('tweet.help');
     }
 
 
